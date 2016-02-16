@@ -1,34 +1,26 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load custom_markdown %}
 
-{% block header %}
-  <h1 class="blog-title">The Bootstrap Blog</h1>
-  <p class="lead blog-description">The official example template of creating a blog with Bootstrap.</p>
-{% endblock %}
-
 {% block content %}
-
 {% for post in post_list %}
 <div class="blog-post">
   <h2 class="blog-post-title">
     <a href="{% url 'page' article_id=post.id %}">{{ post.title }}</a>
   </h2>
   <p class="blog-post-meta">{{ post.date_time|date:"Y /m /d" }}
-     <a href="{% url 'search_tag' tag=post.category %}">{{ post.category|title }}</a>
+    <a href="{% url 'search_tag' tag=post.category %}">{{ post.category|title }}</a>
   </p>
   <div>
     <p>{{ post.content|custom_markdown }}</p>
   </div>
 </div><!-- /.blog-post -->
 {% endfor %}
-
 {% endblock %}
-
 {% block footer_nav %}
-  <nav>
-    <ul class="pager">
-      <li><a href="#">Previous</a></li>
-      <li><a href="#">Next</a></li>
-    </ul>
-  </nav>
+<nav>
+  <ul class="pager">
+    <li><a href="#">Previous</a></li>
+    <li><a href="#">Next</a></li>
+  </ul>
+</nav>
 {% endblock %}

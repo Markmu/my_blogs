@@ -4,7 +4,9 @@
 {% block content %}
   <div class="blog-post">
     <h2 class="blog-post-title">{{ post.title }}</h2>
-    <p class="blog-post-meta">{{ post.date_time|date:"Y /m /d" }} <a>{{ post.category }}</a></p>
+    <p class="blog-post-meta">{{ post.date_time|date:"Y /m /d" }}
+      <a href="{% url 'search_tag' tag=post.category %}">{{ post.category|title }}</a>
+    </p>
     <div>
       <p>{{ post.content|custom_markdown }}</p>
     </div>

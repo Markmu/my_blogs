@@ -9,5 +9,8 @@ urlpatterns = patterns('',
     url(r'^$', 'article.views.home', name='home'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^blog/$', 'article.views.blog', name='blog'),
-    url(r'^blog/(?P<article_id>\d+)/$', 'article.views.page', name='page')
+    url(r'^blog/(?P<article_id>\d+)/$', 'article.views.page', name='page'),
+    url(r'^tag(?P<tag>\w+)/$', 'article.views.search_tag', name='search_tag'),
+    url(r'^aboutme/$', 'article.views.aboutme', name='aboutme')
+
 )
