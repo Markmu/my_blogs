@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, Http404
+from django.core.paginator import Paginator, EmptyPage,PageNotAnInteger
 from datetime import datetime
 from .models import Article
 # Create your views here.
@@ -9,8 +10,18 @@ def home(request):
 
 
 def blog(request):
-    post_list = Article.objects.all()
-    return render(request, 'blog.html', {'post_list': post_list})
+    posts = Article.objects.all()
+    paginator = Paginator(posts, 2)
+    page = request.GET.get('page')
+    page_range = paginator.page_range
+    try :
+        post_list = paginator.page(page)
+    except PageNotAnInteger :
+        post_list = paginator.page(1)
+    except EmptyPage :
+        post_list = paginator.paginator(paginator.num_pages)
+    return render(request, 'blog.html', {'post_list': post_list,
+                                         'page_range': page_range})
 
 def page(request, article_id):
     try:

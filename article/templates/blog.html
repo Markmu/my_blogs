@@ -2,8 +2,10 @@
 {% load custom_markdown %}
 
 {% block header %}
-  <h1 class="blog-title">The Bootstrap Blog</h1>
-  <p class="lead blog-description">The official example template of creating a blog with Bootstrap.</p>
+  <h1 class="blog-title">Blog</h1>
+  <p class="lead blog-description">
+    有，总比没有好！
+  </p>
 {% endblock %}
 
 {% block content %}
@@ -17,7 +19,7 @@
      <a href="{% url 'search_tag' tag=post.category %}">{{ post.category|title }}</a>
   </p>
   <div>
-    <p>{{ post.content|custom_markdown }}</p>
+    <p>{{ post.content|custom_markdown|truncatewords:20 }}</p>
   </div>
 </div><!-- /.blog-post -->
 {% endfor %}
@@ -26,9 +28,26 @@
 
 {% block footer_nav %}
   <nav>
-    <ul class="pager">
-      <li><a href="#">Previous</a></li>
-      <li><a href="#">Next</a></li>
+    <ul class="pagination">
+      {% if post_list.object_list and post_list.paginator.num_pages > 1 %}
+        {% if post_list.has_previous %}
+          <li><a href="?page={{ post_list.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+          <li class="disabled"><a href="#">&laquo;</a></li>
+        {% endif %}
+        {% for p in page_range %}
+          {% ifequal p post_list.number %}
+            <li class="active"><a href="?page={{ p }}">{{ p }}<span class="sr-only">(current)</span></a></li>
+          {% else %}
+            <li><a href="?page={{ p }}">{{ p }}<span class="sr-only">(current)</span></a></li>
+          {% endifequal %}
+        {% endfor %}
+        {% if post_list.has_next %}
+          <li><a href="?page={{ post_list.next_page_number }}">&raquo;</a></li>
+        {% else %}
+          <li class="disabled"><a href="#">&raquo;</a></li>
+        {% endif %}
+      {% endif %}
     </ul>
   </nav>
 {% endblock %}

@@ -1,0 +1,4 @@
+bootstrap-admin==0.3.6
+Django==1.7
+Markdown==2.6.5
+wheel==0.26.0
