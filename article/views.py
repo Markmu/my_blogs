@@ -11,7 +11,7 @@ def home(request):
 
 def blog(request):
     posts = Article.objects.all()
-    paginator = Paginator(posts, 2)
+    paginator = Paginator(posts, 8)
     page = request.GET.get('page')
     page_range = paginator.page_range
     try :
