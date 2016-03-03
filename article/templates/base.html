@@ -7,7 +7,7 @@
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <!-- <link rel="icon" href="../../favicon.ico"> -->
 
     <title>穆超的博客</title>
     <!-- Bootstrap core CSS -->
@@ -111,9 +111,14 @@
               三大爱好：coding、coffee、harmonica
             </p>
           </div>
-          <!-- <div class="sidebar-module">
+          <div class="sidebar-module">
             <h4>Catelog</h4>
-          </div> -->
+            <ul class="list-unstyled">
+              {% for tags in tag_list %}
+                <li><a href="{% url 'search_tag' tag=tags.category %}">{{ tags.category }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
           <div class="sidebar-module">
             <h4>Elsewhere</h4>
             <ol class="list-unstyled">
